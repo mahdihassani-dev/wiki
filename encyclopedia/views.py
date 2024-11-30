@@ -15,7 +15,7 @@ def index(request):
         if search.lower() == entry.lower():
             return HttpResponseRedirect(reverse('entry', args=[search])) # redirect to entry of that content
 
-    return render(request, "encyclopedia/index.html", {"entries": util.list_entries(search), "head": head})
+    return render(request, "encyclopedia/index.html", {"entries": entries, "head": head})
 
 
 def entry(request, title):
