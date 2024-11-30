@@ -6,7 +6,11 @@ import markdown
 
 
 def index(request):
-    return render(request, "encyclopedia/index.html", {"entries": util.list_entries()})
+    
+    search = request.GET.get('q', '')
+    head = 'All Pages' if search == '' else f'Search Result for "{search}"'
+
+    return render(request, "encyclopedia/index.html", {"entries": util.list_entries(search), "head": head})
 
 
 def entry(request, title):

@@ -5,12 +5,23 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
 
+    <h1>{{ head }}</h1>
+    <br/>
+
+    {% if entries %}
     <ul>
         {% for entry in entries %}
-            <li>{{ entry }}</li>
+            <li>
+                <a href="{% url 'entry' entry %}">{{ entry }}</a>
+            </li>
         {% endfor %}
     </ul>
+    {% else %}
+    
+    <div class="empty-list">
+        <p class="empty-message">No entries found!</p>
+    </div>
+    {% endif %}
 
 {% endblock %}
