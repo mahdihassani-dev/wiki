@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 from . import util
+from .forms import NewPageForm
 import markdown
 
 
@@ -25,3 +26,5 @@ def entry(request, title):
     return HttpResponseNotFound(f"There is no content for {title}")
 
 
+def new_page(request):
+    return render(request, "encyclopedia/new_page.html", {"form" : NewPageForm()})
