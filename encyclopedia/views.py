@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 from . import util
 from .forms import NewPageForm, EditPageForm
 import markdown
+import random
 
 
 def index(request):
@@ -26,6 +27,14 @@ def entry(request, title):
         return render(request, "encyclopedia/entry.html", {"title": title, "content": markdown.markdown(util.get_entry(title))})
     return HttpResponseNotFound(f"There is no content for {title}")
 
+
+def random_entry(request):
+    entries = util.list_entries()
+    if entries:
+        random_title = random.choice(entries)
+        return redirect("entry", title=random_title)
+    return HttpResponseNotFound("No entries available.")
+    
 
 def new_page(request):
     if request.method == "POST":
