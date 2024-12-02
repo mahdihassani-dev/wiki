@@ -16,3 +16,14 @@ class NewPageForm(forms.Form):
             'placeholder': 'Enter the content for the page'
         })
     )
+    
+
+class EditPageForm(forms.Form):
+    content = forms.CharField(
+        label="Content",
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 5,
+            'placeholder': 'Enter the content for the page'
+        })
+    )
